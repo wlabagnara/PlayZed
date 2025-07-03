@@ -300,9 +300,11 @@ eth0      Link encap:Ethernet  HWaddr 00:0A:35:00:01:22
 MyPC IP = 192.168.1.173/24
 Zedboard (as defaulted from linux boot) = 192.168.1.10/24
 
-- Launched webbrowser and entered Zedboard IP in URL
-- See screenshot 'ZedBoardHttpServerFromMyPc.png' for webpage from Zedboard.
+- Launched webbrowser and entered Zedboard IP in URL:
+	- See screenshot 'ZedBoardHttpServerFromMyPc.png' for webpage from Zedboard.
 
+- Launched SSH session from my PC via Putty to Zebboard IP:
+	- See screenshot 'ZedBoardSshServerFromMyPcViaSsh.png' for confirmed login.
+	- Screenshot shows terminal session via Putty serial connection as well, to confirm ZedBoard IP address.
 
-
-##########################
+# Screenshot 'ZedBoardPhoto.jpg' shows photo of ZedBoard operating during out of box checks.
