@@ -1,7 +1,7 @@
 
 ### Followed "GettingStartedCardFromZedBoardBox.jpg" to bring up board from SDRAM (linux image) and check if working....
 
-# Output from Zedboard connected to my PC via Putty serial connection...
+# Output from ZedBoard connected to my PC via Putty serial connection...
 
 U-Boot 2011.03-dirty (Jul 11 2012 - 16:07:00)
 
@@ -225,7 +225,7 @@ rcS Complete
 zynq> [    4.530000] eth0: link up (100/FULL)
 
 
-# Zedboard responses to command line (prompt is 'zynq>'):
+# ZedBoard responses to command line (prompt is 'zynq>'):
 
 zynq> ls -al
 
@@ -295,15 +295,15 @@ eth0      Link encap:Ethernet  HWaddr 00:0A:35:00:01:22
           Interrupt:54 Base address:0xb000
 
 
-# Connected my PC via wired Ethernet port on Zedboard:
+# Connected my PC via wired Ethernet port on ZedBoard:
 
 MyPC IP = 192.168.1.173/24
-Zedboard (as defaulted from linux boot) = 192.168.1.10/24
+ZedBoard (as defaulted from linux boot) = 192.168.1.10/24
 
-- Launched webbrowser and entered Zedboard IP in URL:
-	- See screenshot 'ZedBoardHttpServerFromMyPc.png' for webpage from Zedboard.
+- Launched webbrowser and entered ZedBoard IP in URL:
+	- See screenshot 'ZedBoardHttpServerFromMyPc.png' for webpage from ZedBoard.
 
-- Launched SSH session from my PC via Putty to Zebboard IP:
+- Launched SSH session from my PC via Putty to ZedBoard IP:
 	- See screenshot 'ZedBoardSshServerFromMyPcViaSsh.png' for confirmed login.
 	- Screenshot shows terminal session via Putty serial connection as well, to confirm ZedBoard IP address.
 
