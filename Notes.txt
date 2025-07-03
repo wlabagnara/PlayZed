@@ -1,0 +1,28 @@
+Refs:
+https://www.avnet.com/americas/products/avnet-boards/avnet-board-families/zedboard/ (Avnet site)
+https://www.digikey.com/en/product-highlight/d/digilent/zedboard-zynq-7000-development-board (Digikey/Digilent site)
+https://digilent.com/reference/programmable-logic/zedboard/start (Digilent)
+https://digilent.com/reference/programmable-logic/zedboard/demos/oled (Zedboard OLED Demo)
+https://digilent.com/reference/learn/programmable-logic/tutorials/zedboard-dma-audio-demo/start (Zedboard DMA Audio Demo)
+https://digilent.com/reference/learn/programmable-logic/tutorials/github-demos/start (Github Demo Projects)
+
+
+##########################
+
+
+# Appendix:
+
+Booting Zedboard with Linux (Part 1): 
+	https://www.youtube.com/watch?v=YHGQH_owEO4
+
+	1. Using pre-built image provided by Xilinx: http://www.wiki.xilinx.com/file/detai... (link not found!)
+	2. From the extracted image, copy boot.bin, uImage, uramdisk.image.gz and devicetree.dtb to the SD-Card. (our zed board kit sdcard preconfigured with this?)
+	3. Set-up the jumbers in the Zedboard:
+		• JP6 - Shorted
+		• JP7 - GND
+		• JP8 - GND
+		• JP9 - 3V3
+		• JP10 - 3V3
+		• JP11 - GND
+	4. Connect the UART port to your computer using USB and issue "sudo minicom -D /dev/ttyACM0 -b 115200" command (on Linux environment)
+	Source: Tong Wu, Linux on the ZedBoard: www.cse.unsw.edu.au/~cs4601/16s1/labs/Linux_on_the_ZedBoard.pdf
