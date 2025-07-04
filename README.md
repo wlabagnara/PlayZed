@@ -3,4 +3,4 @@
 
 - Learning projects for the ZedBoard
 
-1. Out of the box check:  See 'InitialCheckOutOfBoxFromSdramBoot.txt'
+1. Out of the box check:  See 'OutOfBox' folder file 'InitialCheckOutOfBoxFromSdramBoot.txt'
