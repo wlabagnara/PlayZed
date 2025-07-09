@@ -7,7 +7,7 @@
  ref: https://www.youtube.com/watch?v=a-jD66901-I&t=1s
 
 
- - Followed reference and documented steps in "SimpleDebugOnZed.pdf"
+ - Followed reference and documented steps in ["SimpleDebugOnZed.pdf"](SimpleDebugOnZed.pdf)
 
 
 
