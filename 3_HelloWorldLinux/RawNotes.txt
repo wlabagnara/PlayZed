@@ -1,0 +1,360 @@
+
+Goal is to build and debug the 'Linux Hello World' example project that comes with Vitis Unified on our ZedBoard.
+
+
+Using Vitis Unified 2024.2:
+
+1. Set workspace to 'Projects/VitisZedLinuxWs' (brand new folder)
+2. Click on Examples Icon and select '+' sign to right of 'Linux Hello World' to create 'New Application Component'
+	Component name: linux_hello_world
+	Component location: C:\Projects\VitisZedLinuxWs
+3. 
+
+
+
+
+
+
+
+
+
+**********************************************************************************************
+
+
+
+
+
+
+Xilinx/AMD Embedded Linux (Petalinux) running on a ZED Processor Board
+
+ref: https://youtu.be/OfozFBfvWeY?si=MDoJQwV-j3ixbGOd
+
+	[SUPPORT]
+	Free trial of Altium Designer: https://www.altium.com/yt/philslab
+
+	Patreon:   / phils94  
+
+	Mixed-signal hardware design course: https://phils-lab-shop.fedevel.education
+
+	Advanced Hardware Design Course Survey:
+	https://forms.gle/X4jwvtZeJ1jTXh7r9
+
+	[GIT]
+	https://github.com/pms67
+
+	[LINKS]
+	Instagram:   / philslabyt  
+
+	Petalinux: https://www.xilinx.com/products/desig...
+
+
+My Project Notes:
+=================
+
+	Q:  Linux Hello World Example project in Vitis 2024.2 seems 'turnkey', BUT, it is not... unable to launch debugger to target!...
+		guessing it requires steps to create a Petalinux 'image', 'filesystem', etc...
+  
+		https://docs.amd.com/r/en-US/ug1165-zynq-embedded-design-tutorial/Building-and-Debugging-Linux-Applications-for-Zynq-7000-SoCs
+
+	Q: 'Work directory': /run/media/mmcblk0p1  (in Vitis 2024.2 target configuration)
+		zynq> ls dev/mmcblk0p1 exists on our zed board... use that instead?.. tried, doesn't work either...
+		
+	Q: What do we have to do to get our simple 'Linux Hello World' example in Vitis 2024.2 IDE to debug on target?...
+		Why can't we run it on the ZedBoard target that is already running 'Linux' on it's SD Card?
+		Wild guess: Need 'local' Petalinux image on PC that is same as Petalinux image on target, plus more?...
+					Debug of a 'Hello World Linux' example from Vitis IDE has not been accomplished by a human yet?
+					Answer is here? https://docs.amd.com/r/en-US/ug1165-zynq-embedded-design-tutorial/Building-and-Debugging-Linux-Applications-for-Zynq-7000-SoCs
+					(it ain't an easy 'turnkey' example?...)
+					
+					Note "Generate the SYSROOT required for generating a linux application using the following command: 
+						petalinux-build --sdk
+						petalinux-package --sysroot ?
+		
+					Are we supposed to change jumpers on ZedBoard to be in JTAG mode? 
+						(file:///C:/Projects/PlayZed/ManualsAndGuides/ZedBoard_HW_UG_v2_2.pdf pg 28 of 38)
+					
+					Platform and Application (hello world linux example) build successfully, BUT what is this 'Problem' or really an Error?!...
+					{
+						"resource": "file:///c%3A/Projects/PlayZedVitisLinux2Ws/linux_hello_world/src/helloworld.c",
+						"owner": "_generated_diagnostic_collection_name_#fe3677a5-80db-4453-af00-bdb96812d50c",
+						"code": "pp_file_not_found",
+						"severity": 1,
+						"message": "In included file: 'gnu/stubs-soft.h' file not found",
+						"source": "clang",
+						"startLineNumber": 0,
+						"startColumn": 9,
+						"endLineNumber": 0,
+						"endColumn": 10
+					}
+					---> Removed the stdio.h include and c/o'd the print and added a couple of i++ statements to set breakpoints at.
+							Get no problems when built, BUT still does not allow debug to target!
+	Petalinux download:
+	===================
+
+	https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/embedded-software/petalinux-sdk.html (petalinux-v2024.2-11062026-installer.run
+		( I got 'v2024.2' which maybe corresponds to our Vitis Unified 2024.2? )
+
+		https://adaptivesupport.amd.com/s/article/000037095?language=en_US
+
+		https://docs.amd.com/search/all?query=Petalinux&value-filters=Product_custom~%2522Adaptive+SoC+%2526+FPGA+Tools%257CPetaLinux+Tools%257C2024.2%2522&content-lang=en-US
+
+		https://www.xilinx.com/support/installer/installer-info-general.html
+
+		https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/embedded-software/whats-new.html
+
+
+***************************
+
+Steps:
+
+https://www.youtube.com/watch?v=k03r2Ud42jY&t=1185s (Xilinx Petalinux 2020.2) 
+
+https://www.youtube.com/watch?v=OfozFBfvWeY&t=23s (He is using VirtualBox 7.0 with Ubuntu 22.04.2 LTS and I am using WSL2 of Ubuntu 24.04.1 LTS (noble) )
+
+Petalinux download/installer: https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2024-2.html
+
+https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/embedded-software/petalinux-sdk.html
+
+After having to login to AMD/Vitis ... website says that  'petalinux-v2024.2-11062026-installer.run' is the filename of the 'installer'
+
+His installer version was 'petalinux-v2022.2-10141622-intaller.run'
+
+sudo dpkg-reconfigure dash (needed as per video)
+
+Suggested intall to a certain folder, like 'petalinux-tools'
+
+	chmod +x petalinux-vXXX-final-installer.run
+	./petalinux-vXXX-final-installer.run -d /opt/petalinux (ref: https://www.google.com/search?q=command+line+to+run+petalinux+installer+.run+file&sca_esv=93d9039c66c2f80c&sxsrf=AE3TifNzt3vVCE0G4NEK9P6IDVW8AnUSjg%3A1752542234104&source=hp&ei=Gqx1aPDzA7C8ptQP8Obs0QE&iflsig=AOw8s4IAAAAAaHW6KioeCI-GStU5IXv1_GQCcI4V_eji&ved=0ahUKEwjw6MLK2L2OAxUwnokEHXAzOxoQ4dUDCBk&uact=5&oq=command+line+to+run+petalinux+installer+.run+file&gs_lp=Egdnd3Mtd2l6IjFjb21tYW5kIGxpbmUgdG8gcnVuIHBldGFsaW51eCBpbnN0YWxsZXIgLnJ1biBmaWxlMgUQIRigATIFECEYoAEyBRAhGKsCSLqtAlC9HFjLqwJwGHgAkAECmAGhAqABvzWqAQc1NC4xNy4zuAEDyAEA-AEBmAJgoAKQNagCCsICBxAjGCcY6gLCAgoQLhgDGOoCGI8BwgIKEAAYAxjqAhiPAcICDhAuGIAEGLEDGNEDGMcBwgIOEAAYgAQYsQMYgwEYigXCAggQABiABBixA8ICCxAuGIAEGLEDGIMBwgILEAAYgAQYsQMYgwHCAgsQLhiABBixAxjUAsICDhAuGIAEGMcBGI4FGK8BwgIREC4YgAQYsQMY0QMYgwEYxwHCAgUQABiABMICCxAuGIAEGNEDGMcBwgILEAAYgAQYsQMYigXCAggQLhiABBixA8ICBhAAGBYYHsICBxAAGIAEGA3CAggQABgWGAoYHsICBRAAGO8FwgIIEAAYgAQYogTCAggQABiiBBiJBcICCxAAGIAEGIYDGIoFwgIFEC4YgATCAg4QLhiABBixAxiDARiKBcICCBAAGIAEGMkDwgILEAAYgAQYkgMYigXCAg4QLhiABBixAxiDARjUAsICCxAuGIAEGMcBGK8BwgIFECEYnwXCAgcQIRigARgKmAMQ8QUINefV8Ra99JIHBzczLjIyLjGgB4aJBLIHBzQ5LjIyLjG4B-ozwgcJMC40Ni40Mi44yAfwAg&sclient=gws-wiz)
+
+
+Our installation session:
+=========================
+
+	'mkdir petalinux-tools'  OR  'mkdir -p /home/wlaba/playZed/petalinux-tools'
+	chmod +x petalinux-v2024.2-11062026-installer.run
+	./petalinux-v2024.2-11062026-installer.run -d /home/wlaba/playZed/petalinux-tools
+
+	./petalinux-v2024.2-11062026-installer.run --help  (for help!)
+	
+	wlaba@DESKTOP-ORAV2LD:~/playZed$ ls
+	  petalinux-tools													<== 'install folder'
+	  petalinux-v2024.2-11062026-installer.run  						<== installer script downloaded from AMD/Xilinx
+	  petalinux-v2024.2-11062026-installer.run:Zone.Identifier  		<== ?
+	  petalinux_installation.log  
+	  zed.xsa															<== h/w file for zed board (copied from vitis project with zed platform)
+
+Our install script run had errors...
+
+	[ERROR] You are missing the following system tools required by PetaLinux:
+
+	- gcc
+	- xterm
+	- autoconf
+	- libtool
+	- texinfo
+	- zlib1g-dev
+	- gcc-multilib
+	- build-essential
+	Please check PetaLinux installation guide - required tools and libraries package section for detailed information
+
+	[INFO] Checking installed development libraries
+	[ERROR] You are missing these development libraries required by PetaLinux:
+
+	- zlib
+	- ncurses
+
+	Please install them with your operating system package manager, and try again
+	ERROR: Please install required packages.
+
+apt  OR  apt-get
+apt --help
+apt list [ | grep gcc ]
+
+sudo apt update (do this first? - we didn't)
+
+sudo apt install gcc 
+sudo apt install xterm
+sudo apt install autoconf
+sudo apt install libtool
+sudo apt install texinfo
+sudo apt install zlib1g-dev
+sudo apt install gcc-multilib
+sudo apt install build-essential
+sudo apt install libncurses-dev    <=== this one, 'ncurses', not obvious to a newbie!
+
+*****************
+
+wlaba@DESKTOP-ORAV2LD:~/playZed$ ./petalinux-v2024.2-11062026-installer.run -d /home/wlaba/playZed/petalinux-tools
+./petalinux-v2024.2-11062026-installer.run: line 3: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8): No such file or directory
+PetaLinux CMD tools installer version 2024.2
+============================================
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+[WARNING] This is not a supported OS
+[INFO] Checking free disk space
+[INFO] Checking installed tools
+[INFO] Checking installed development libraries
+[INFO] Checking network and other services
+[WARNING] No tftp server found - please refer to "UG1144  PetaLinux Tools Documentation Reference Guide" for its impact and solution
+
+LICENSE AGREEMENTS
+
+PetaLinux SDK contains software from a number of sources.  Please review
+the following licenses and indicate your acceptance of each to continue.
+
+You do not have to accept the licenses, however if you do not then you may
+not use PetaLinux SDK.
+
+Use PgUp/PgDn to navigate the license viewer, and press 'q' to close
+
+Press Enter to display the license agreements
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Do you accept Xilinx End User License Agreement? [y/N] > y
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Do you accept Third Party End User License Agreement? [y/N] > y
+[INFO] Installing PetaLinux SDK...done
+[INFO] Setting it up...
+[INFO] Extracting xsct tarball...
+
+  :
+  :
+  
+wlaba@DESKTOP-ORAV2LD:~/playZed$ ./petalinux-v2024.2-11062026-installer.run -d /home/wlaba/playZed/petalinux-tools
+./petalinux-v2024.2-11062026-installer.run: line 3: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8): No such file or directory
+PetaLinux CMD tools installer version 2024.2
+============================================
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+[WARNING] This is not a supported OS
+[INFO] Checking free disk space
+[INFO] Checking installed tools
+[INFO] Checking installed development libraries
+[INFO] Checking network and other services
+[WARNING] No tftp server found - please refer to "UG1144  PetaLinux Tools Documentation Reference Guide" for its impact and solution
+
+LICENSE AGREEMENTS
+
+PetaLinux SDK contains software from a number of sources.  Please review
+the following licenses and indicate your acceptance of each to continue.
+
+You do not have to accept the licenses, however if you do not then you may
+not use PetaLinux SDK.
+
+Use PgUp/PgDn to navigate the license viewer, and press 'q' to close
+
+Press Enter to display the license agreements
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Do you accept Xilinx End User License Agreement? [y/N] > y
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Do you accept Third Party End User License Agreement? [y/N] > y
+[INFO] Installing PetaLinux SDK...done
+[INFO] Setting it up...done
+[INFO] Extracting xsct tarball...done
+[INFO] PetaLinux SDK has been successfully set up and is ready to be used.
+
+*****************
+
+ref: https://youtu.be/iUeM-DqdNmE?si=NlmiGsgDcdtztAOh
+
+cd to your installation folder (the folder given after the -d option)        <==== NEEDED FROM OUR 'INSTALL' FOLDER EACH TIME!
+source ./settings.sh
+
+
+*************************************************************************************************************************************************
+The PetaLinux source code and images provided/generated are for demonstration purposes only.
+Please refer to https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/2741928025/Moving+from+PetaLinux+to+Production+Deployment
+ for more details
+*************************************************************************************************************************************************
+PetaLinux environment set to '/home/wlaba/playZed/petalinux-tools'
+WARNING: /bin/sh is not bash!
+bash is PetaLinux recommended shell. Please set your default shell to bash.
+[WARNING] This is not a supported OS
+[INFO] Checking free disk space
+[INFO] Checking installed tools
+[INFO] Checking installed development libraries
+[INFO] Checking network and other services
+[WARNING] No tftp server found - please refer to "UG1144 2024.2 PetaLinux Tools Documentation Reference Guide" for its impact and solution
+
+
+***********************************************
+
+
+Our first petalinux command (to create a project)
+
+ubuntu-prompt> cd <to our installation folder>   ( cd petalinux-tools/ )
+
+ubuntu-prompt> petalinux-create --help  (when you need help)
+
+ubuntu-prompt> petalinux-create --type project --template zynq --name PetalinuxDemo1
+
+	wlaba@DESKTOP-ORAV2LD:~/playZed/petalinux-tools$ petalinux-create --type project --template zynq --name PetalinuxDemo1
+	[NOTE] Argument: "--type project" has been deprecated. It is recommended to start using new python command line Argument.  <=== FYI
+	[NOTE] Use: petalinux-create project [OPTIONS]
+	[INFO] Create project: PetalinuxDemo1
+	[INFO] New project successfully created in /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1			<== But was successfully
+ 
+ubuntu-prompt> petalinux-config --get-hw-description=<path/to/our/xsa/file>
+
+ubuntu-prompt> petalinux-config --get-hw-description=/home/wlaba/playZed    <== Our zed.xsa file is under here
+
+**********************
+
+
+configuring with xsa file and -D (debug option) .....
+
+
+wlaba@DESKTOP-ORAV2LD:~/playZed/petalinux-tools/PetalinuxDemo1$ petalinux-config -D --get-hw-description=/home/wlaba/playZed
+[INFO] Getting hardware description
+
+[INFO] Renaming zed.xsa to system.xsa
+
+[DEBUG] gcc --version | sed -ne "s/.* \([0-9]\+\.[0-9]\+\)\.[0-9]\+.*/\\1/p"
+[DEBUG] unset LD_LIBRARY_PATH;source /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/environment-setup-cortexa9t2hf-neon-xilinx-linux-gnueabi &>> /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/build/config.log;source /home/wlaba/playZed/petalinux-tools/.environment-setup-x86_64-petalinux-linux;source /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/layers/poky/oe-init-build-env /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/build &>> /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/build/config.log;
+[DEBUG] unset LD_LIBRARY_PATH;source /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/environment-setup-cortexa9t2hf-neon-xilinx-linux-gnueabi &>> /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/build/config.log;source /home/wlaba/playZed/petalinux-tools/.environment-setup-x86_64-petalinux-linux;source /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/layers/poky/oe-init-build-env /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/build &>> /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/build/config.log;gen-machineconf --soc-family zynq --hw-description /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/hw-description/system.xsa --xsct-tool /home/wlaba/playZed/petalinux-tools/components/xsct --output /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/configs             --add-rootfsconfig /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/meta-user/conf/user-rootfsconfig --petalinux --menuconfig project --debug
+
+[INFO] Bitbake is not available, some functionality may be reduced.
+
+[INFO] Using HW file: /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/hw-description/system.xsa
+[DEBUG] Using xsct from : /home/wlaba/playZed/petalinux-tools/components/xsct/bin/xsct
+[INFO] Getting Platform info from HW file
+[DEBUG] Using the soc_family specified by user:zynq
+[INFO] Generating Kconfig for project
+[DEBUG] Generating System HW file
+[DEBUG] xsct -sdx -nodisp /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/layers/meta-xilinx/meta-xilinx-core/gen-machine-conf/gen-machine-scripts/hw-description.tcl plnx_gen_hwsysconf /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/hw-description/system.xsa
+Traceback (most recent call last):
+  File "/home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/layers/meta-xilinx/meta-xilinx-core/gen-machine-conf/gen-machineconf", line 355, in <module>
+    ret = main()
+          ^^^^^^
+  File "/home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/layers/meta-xilinx/meta-xilinx-core/gen-machine-conf/gen-machineconf", line 349, in main
+    ret = args.func(args)
+          ^^^^^^^^^^^^^^^
+  File "/home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/layers/meta-xilinx/meta-xilinx-core/gen-machine-conf/lib/gen-machineconf/xsct_flow.py", line 325, in ParseXsa
+    hw_info = gatherHWInfo(args)
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/layers/meta-xilinx/meta-xilinx-core/gen-machine-conf/lib/gen-machineconf/xsct_flow.py", line 276, in gatherHWInfo
+    GenXsctSystemHwFile(genmachine_scripts, Kconfig_syshw,
+  File "/home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/layers/meta-xilinx/meta-xilinx-core/gen-machine-conf/lib/gen-machineconf/xsct_flow.py", line 160, in GenXsctSystemHwFile
+    common_utils.RunCmd(cmd, output, shell=True)
+  File "/home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/components/yocto/layers/meta-xilinx/meta-xilinx-core/gen-machine-conf/lib/common_utils.py", line 136, in RunCmd
+    raise Exception('\n%s\n%s\n%s' %
+Exception:
+
+/home/wlaba/playZed/petalinux-tools/components/xsct/bin/rdiArgs.sh: line 37: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8): No such file or directory
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  locale::facet::_S_create_c_locale name not valid
+/home/wlaba/playZed/petalinux-tools/components/xsct/bin/rdiArgs.sh: line 390: 69282 Aborted                 (core dumped) "$RDI_PROG" "$@"
+
+[ERROR]
+
+/home/wlaba/playZed/petalinux-tools/components/xsct/bin/rdiArgs.sh: line 37: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8): No such file or directory
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  locale::facet::_S_create_c_locale name not valid
+/home/wlaba/playZed/petalinux-tools/components/xsct/bin/rdiArgs.sh: line 390: 69282 Aborted                 (core dumped) "$RDI_PROG" "$@"
+
+[DEBUG] Shutting down bitbake
+[ERROR] Command gen-machineconf --soc-family zynq --hw-description /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/hw-description/system.xsa --xsct-tool /home/wlaba/playZed/petalinux-tools/components/xsct --output /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/configs             --add-rootfsconfig /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/meta-user/conf/user-rootfsconfig --petalinux --menuconfig project --debug failed
+
+****************
+
+
+
