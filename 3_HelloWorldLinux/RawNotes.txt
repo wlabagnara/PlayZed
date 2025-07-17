@@ -7,6 +7,10 @@ ref: https://youtu.be/OfozFBfvWeY?si=MDoJQwV-j3ixbGOd
 
 	Reference video is using Windows for the Vitis side and Ubuntu VM for the Petalinux tools.
 	
+
+Unable to Debug Linux Application on AMD Vitis Unified IDE 2024.1 (ZCU106):   <==== Hello?!
+
+	https://adaptivesupport.amd.com/s/question/0D5KZ000018Frkc0AC/unable-to-debug-linux-application-on-amd-vitis-unified-ide-20241-zcu106?language=en_US
 	
 My Project Notes:
 =================
