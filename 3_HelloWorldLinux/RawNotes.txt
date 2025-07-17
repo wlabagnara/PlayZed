@@ -4,6 +4,10 @@ Xilinx/AMD Embedded Linux (Petalinux) running on a ZED Processor Board
 ref: https://youtu.be/OfozFBfvWeY?si=MDoJQwV-j3ixbGOd
 
 	73296 - PetaLinux: How to install the required packages for the PetaLinux Build Host: https://adaptivesupport.amd.com/s/article/73296?language=en_US   <=== TRY THIS STEP!!!?
+		chmod +x plnx-env-setup.sh
+		sudo ./plnx-env-setup.sh
+		
+	After doing above step: 'sudo dpkg-reconfigure dash'
 
 	Reference video is using Windows for the Vitis side and Ubuntu VM for the Petalinux tools.
 	
