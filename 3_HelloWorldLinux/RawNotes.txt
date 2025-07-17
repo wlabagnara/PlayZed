@@ -1,53 +1,13 @@
 
-Goal is to build and debug the 'Linux Hello World' example project that comes with Vitis Unified on our ZedBoard.
-
-
-Using Vitis Unified 2024.2:
-
-1. Set workspace to 'Projects/VitisZedLinuxWs' (brand new folder)
-2. Click on Examples Icon and select '+' sign to right of 'Linux Hello World' to create 'New Application Component'
-	Component name: linux_hello_world
-	Component location: C:\Projects\VitisZedLinuxWs
-3. 
-
-
-
-
-
-
-
-
-
-**********************************************************************************************
-
-
-
-
-
-
 Xilinx/AMD Embedded Linux (Petalinux) running on a ZED Processor Board
 
 ref: https://youtu.be/OfozFBfvWeY?si=MDoJQwV-j3ixbGOd
 
-	[SUPPORT]
-	Free trial of Altium Designer: https://www.altium.com/yt/philslab
+	73296 - PetaLinux: How to install the required packages for the PetaLinux Build Host: https://adaptivesupport.amd.com/s/article/73296?language=en_US   <=== TRY THIS STEP!!!?
 
-	Patreon:   / phils94  
-
-	Mixed-signal hardware design course: https://phils-lab-shop.fedevel.education
-
-	Advanced Hardware Design Course Survey:
-	https://forms.gle/X4jwvtZeJ1jTXh7r9
-
-	[GIT]
-	https://github.com/pms67
-
-	[LINKS]
-	Instagram:   / philslabyt  
-
-	Petalinux: https://www.xilinx.com/products/desig...
-
-
+	Reference video is using Windows for the Vitis side and Ubuntu VM for the Petalinux tools.
+	
+	
 My Project Notes:
 =================
 
