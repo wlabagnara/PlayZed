@@ -324,5 +324,104 @@ terminate called after throwing an instance of 'std::runtime_error'
 
 ****************
 
+BASH vs. DASH on UBUNTU versions ?!?!....................
+
+bash vs dash on verions of Ubuntu?...
+
+Up to Ubuntu 22.04 included (and Debian 11 included), you can switch sh to bash (instead of dash, the default) by reconfiguring dash (yes, it’s somewhat counter-intuitive):
+
+sudo dpkg-reconfigure dash
+
+This will ask whether you want dash to be the default system shell; answer “No” (Tab then Enter) and bash will become the default instead (i.e. /bin/sh will point to /bin/bash).
+
+Since Ubuntu 22.10 and Debian 12, this is no longer supported; if you want to switch /bin/sh to /bin/bash, you’ll have to symlink it manually. See Gilles’ answer for details.
+
+	Note: I was using Ubuntu 24.04.1 LTS so assume that 'sudo dpkg-reconfigure dash' will NOT work - and looks like it doesn't - just exits without question!
+
+and answer “yes” to keep dash as /bin/sh or “no” to switch to bash.
+
+You can keep bash as /bin/sh, but it'll make your system a bit slower. It's even conceivable that some system script is incompatible with bash, although that's unlikely 
+since bash is mostly a superset of dash.
+
+For distributions which don't have an interface to choose between implementations of /bin/sh, here's how to switch to bash.
+
+sudo ln -s bash /bin/sh.bash
+sudo mv /bin/sh.bash /bin/sh
+Keep a terminal open and check that you can still run some sh scripts after that. If you mess up this command, it'll make your system unusable. 
+(By the way, the reason I used the multiple commands above rather than the straightforward-looking sudo ln -sf bash /bin/sh is that ln -sf is not atomic. 
+In the admittedly unlikely case your computer crashed during this operation, you'd need to boot from rescue media to restore it. In contrast, mv is atomic.)
+
+To restore dash as /bin/sh:
+
+sudo ln -s dash /bin/sh.dash
+sudo mv /bin/sh.dash /bin/sh
+
+Note that if sh is /bin/bash by default on your distribution, switching to dash may cause scripts to fail, because bash has many more features 
+than dash. Bash scripts should start with #!/bin/bash, and scripts starting with #!/bin/sh should not use bash-specific features, but distributions 
+that ship with bash as /bin/sh may use bash-specific features in 
+#!/bin/sh scripts that are specific to that distribution (it's ok as long as there's no expectation that users can switch to dash as /bin/sh and there's 
+no expectations that these scripts work on another distribution).
+
+****************
+
+Changed to WSL2 Ubuntu Ubuntu 22.04 like in the video and tried several xsa inputs... all failed ...
+
+Failed....
+
+/home/wlaba/playZed/petalinux-tools/components/xsct/bin/rdiArgs.sh: line 37: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8): No such file or directory
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  locale::facet::_S_create_c_locale name not valid
+/home/wlaba/playZed/petalinux-tools/components/xsct/bin/rdiArgs.sh: line 390: 61717 Aborted                 (core dumped) "$RDI_PROG" "$@"
+
+Try this fix?...
+
+$ sudo apt install locales
+$ sudo locale-gen en_US.UTF-8
+$ sudo dpkg-reconfigure locales
+
+Will get a config-menu to select the setting... I guess select the right one...
+
+****************
+
+That solved above failure, but .... next error....
+
+
+[INFO] Generating Kconfig for project
+[ERROR]
+
+****** Software Commandline Tool (XSCT) v2024.2.0
+  **** SW Build 5233591 on Sat Nov 02 20:05:54 MDT 2024
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+Warning: XSCT is deprecated and will be removed in future releases.
+We recommend using the new Python command-line tool for project management and debugging:
+- Run "vitis -i" for interactive mode.
+- Run "vitis -s <script>" for script mode.
+
+package require xsdb FAILED:
+error loading hsi package: couldn't load file "libxv_commontasks.so": libtinfo.so.5: cannot open shared object file: No such file or directory
+    while executing
+"error "error loading hsi package: $msg""
+    (file "/home/wlaba/playZed/petalinux-tools/components/xsct/scripts/xsct/xsdb/xsdb.tcl" line 11)
+    invoked from within
+"source /home/wlaba/playZed/petalinux-tools/components/xsct/scripts/xsct/xsdb/xsdb.tcl"
+    ("package ifneeded xsdb 0.1" script)
+
+[ERROR] Command gen-machineconf --soc-family zynq --hw-description /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/hw-description/system.xsa 
+--xsct-tool /home/wlaba/playZed/petalinux-tools/components/xsct --output /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/configs             
+--add-rootfsconfig /home/wlaba/playZed/petalinux-tools/PetalinuxDemo1/project-spec/meta-user/conf/user-rootfsconfig --petalinux --menuconfig project failed	
+	
+*****************************
+
+
+https://docs.amd.com/r/en-US/ug1144-petalinux-tools-reference-guide/petalinux-create-project-Options  (petalinux tools documentation Reference Guide UG1144) - dropdown to your version!
+https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/embedded-software/petalinux-sdk.html
+https://www.youtube.com/@PhilsLab/videos (PHIL's LAB VIDEOS)
+
+https://adaptivesupport.amd.com/s/article/73296?language=en_US (73296 Petalinux: How to install the required... leads to "plnx-env-setup.sh" download.
+
+
 
 
