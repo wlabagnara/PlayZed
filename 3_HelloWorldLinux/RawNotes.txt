@@ -400,7 +400,7 @@ We recommend using the new Python command-line tool for project management and d
 - Run "vitis -i" for interactive mode.
 - Run "vitis -s <script>" for script mode.
 
-package require xsdb FAILED:
+sudo apt update
 error loading hsi package: couldn't load file "libxv_commontasks.so": libtinfo.so.5: cannot open shared object file: No such file or directory
     while executing
 "error "error loading hsi package: $msg""
@@ -423,5 +423,12 @@ https://www.youtube.com/@PhilsLab/videos (PHIL's LAB VIDEOS)
 https://adaptivesupport.amd.com/s/article/73296?language=en_US (73296 Petalinux: How to install the required... leads to "plnx-env-setup.sh" download.
 
 
+***************
+
+for above  'sudo apt update'..
+
+	sudo apt update
+	wget http://security.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2ubuntu0.1_amd64.deb
+	sudo apt install ./libtinfo5_6.3-2ubuntu0.1_amd64.deb
 
 
