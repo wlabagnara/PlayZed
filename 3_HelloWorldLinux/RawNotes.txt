@@ -425,10 +425,37 @@ https://adaptivesupport.amd.com/s/article/73296?language=en_US (73296 Petalinux:
 
 ***************
 
-for above  'sudo apt update'..
+for above, fix is...
 
 	sudo apt update
 	wget http://security.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2ubuntu0.1_amd64.deb
 	sudo apt install ./libtinfo5_6.3-2ubuntu0.1_amd64.deb
+
+
+IT STARTED WORKING !!! 
+Can configure, build and boot (to qemu) !!! :-)
+
+***************
+
+
+Summary of useful links:
+
+https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2024-2.html (Download petalinux installer, 2024.2 selected)
+
+https://docs.amd.com/r/en-US/ug1144-petalinux-tools-reference-guide/petalinux-create-project (PetaLinux Tools Documentation: Reference Guide (UG1144), selected 2024.2)
+
+https://www.youtube.com/watch?v=OfozFBfvWeY (Embedded Linux + FPGA/SoC (Zynq Part 5) - Phil's Lab  - very good custom zynq board bring-up with Vitis, Vivado, petalinux, and XSA file!)
+
+https://adaptivesupport.amd.com/s/article/73296?language=en_US (73296 - PetaLinux: How to install the required packages for the PetaLinux Build Host?)
+
+Disabling DASH on Ubuntu based on version:
+https://unix.stackexchange.com/questions/442510/how-to-use-bash-for-sh-in-ubuntu#:~:text=On%20Ubuntu%2C%20%2Fbin%2Fsh%20is%20a%20symbolic%20link%20to,as%20%2Fbin%2Fsh%20or%20%E2%80%9Cno%E2%80%9D%20to%20switch%20to%20bash.
+
+Fix for LC_ALL cannot change locale:
+https://stackoverflow.com/questions/66859800/bin-bash-warning-setlocale-lc-all-cannot-change-locale-en-us-utf-8
+
+https://github.com/nahidjabeen/ZedBoardIdea/blob/master/Follow-AMD.txt (very good notes and research)
+
+https://stackoverflow.com/questions/57999734/how-to-connect-a-host-pc-to-a-zedboard-and-share-the-host-pc-internet-access (zedBoard to PC IP connection)
 
 
